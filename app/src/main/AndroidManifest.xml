@@ -13,6 +13,9 @@
             android:theme="@style/Theme.Sunlakeseatingtracker"
             tools:targetApi="31">
         <activity
+                android:name=".QrActivity"
+                android:exported="false" />
+        <activity
                 android:name=".MainActivity"
                 android:exported="true">
             <intent-filter>

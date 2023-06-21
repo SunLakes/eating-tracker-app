@@ -18,25 +18,13 @@ package com.example.sunlakesEatingTracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
-/**
- * @author Mykhailo Balakhon
- * @link t.me/mibal_ua
- */
-public class MainActivity extends AppCompatActivity {
-
-    protected final Button startButton = findViewById(R.id.start_button);
+public class QrActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        startButton.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, QrActivity.class));
-        });
+        setContentView(R.layout.activity_qr);
     }
 }
