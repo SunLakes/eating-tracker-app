@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ua.mibal.peopleService.model;
+package com.example.sunlakesEatingTracker.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
