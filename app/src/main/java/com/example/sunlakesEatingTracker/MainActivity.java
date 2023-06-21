@@ -16,11 +16,11 @@
 
 package com.example.sunlakesEatingTracker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * @author Mykhailo Balakhon
@@ -28,15 +28,20 @@ import android.widget.Button;
  */
 public class MainActivity extends AppCompatActivity {
 
-    protected final Button startButton = findViewById(R.id.start_button);
+    private Button startButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startButton.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, QrActivity.class));
-        });
+        initViews();
+    }
+
+    private void initViews() {
+        startButton = findViewById(R.id.start_button);
+        startButton.setOnClickListener(view ->
+                startActivity(new Intent(MainActivity.this, QrActivity.class))
+        );
     }
 }
