@@ -27,19 +27,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.sunlakesEatingTracker.component.SendRequestTask;
+import com.example.sunlakesEatingTracker.model.ApiError;
+import com.example.sunlakesEatingTracker.model.Entry;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 public class QrActivity extends AppCompatActivity {
 
     private static final int REQUEST_CAMERA_PERMISSION = 201;
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     private int dayId;
     private int eatingId;
@@ -143,6 +151,7 @@ public class QrActivity extends AppCompatActivity {
 
                     final String data = barcodes.valueAt(0).displayValue;
                     scannedValueTextView.setText(data);
+
                     if (!cachedLastData.equals(data)) {
                         cachedLastData = data;
                         System.out.println("recognized new");
@@ -154,8 +163,51 @@ public class QrActivity extends AppCompatActivity {
     }
 
     private void sendPostRequest(final String data) {
-
-        // TODO send request
+        int braceletId;
+        try {
+            braceletId = Integer.parseInt(data);
+        } catch (NumberFormatException e) {
+            Toast.makeText(getApplicationContext(),
+                    "Not a number",
+                    Toast.LENGTH_SHORT
+            ).show();
+            return;
+        }
+        final Entry entry = new Entry(
+                braceletId,
+                dayId,
+                eatingId
+        );
+        try {
+            // FIXME hardcode url
+            Optional<ApiError> optionalError = new SendRequestTask(
+                    "http://192.168.1.50:8080/eating", objectMapper
+            ).execute(entry).get();
+            if (optionalError.isPresent()) {
+                // TODO generalize dialog creation
+                new AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage(optionalError.get().toString())
+                        .setNegativeButton("OK",
+                                (dialog, which) -> dialog.dismiss())
+                        .create()
+                        .show();
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        entry.getBraceletId() + " OK",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            // TODO generalize dialog creation
+            new AlertDialog.Builder(this)
+                    .setTitle("Error")
+                    .setMessage(e.getMessage())
+                    .setNegativeButton("OK",
+                            (dialog, which) -> dialog.dismiss())
+                    .create()
+                    .show();
+        }
     }
 
     @Override
