@@ -102,6 +102,9 @@ public class QrActivity extends AppCompatActivity {
             }
         });
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
+
+            private String cachedLastData = "";
+
             @Override
             public void release() {
                 Toast.makeText(getApplicationContext(),
@@ -118,16 +121,21 @@ public class QrActivity extends AppCompatActivity {
                         scannedValueTextView.setText(R.string.no_data);
                         return;
                     }
-                    System.out.println("recognized");
+
                     final String data = barcodes.valueAt(0).displayValue;
                     scannedValueTextView.setText(data);
-                    sendPostRequest(data);
+                    if (!cachedLastData.equals(data)) {
+                        cachedLastData = data;
+                        System.out.println("recognized new");
+                        sendPostRequest(data);
+                    }
                 });
             }
         });
     }
 
     private void sendPostRequest(final String data) {
+
         // TODO send request
     }
 
