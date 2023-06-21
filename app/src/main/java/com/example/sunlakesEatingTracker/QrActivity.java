@@ -116,7 +116,7 @@ public class QrActivity extends AppCompatActivity {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 textViewScannedValue.post(() -> {
                     if (barcodes.size() == 0) {
-                        textViewScannedValue.setText("No DATA");
+                        textViewScannedValue.setText(R.string.no_data);
                         return;
                     }
                     // TODO send request  
