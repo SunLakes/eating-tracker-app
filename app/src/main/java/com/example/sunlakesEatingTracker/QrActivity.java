@@ -42,7 +42,7 @@ public class QrActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
 
     private SurfaceView surfaceView;
-    private TextView textViewScannedValue;
+    private TextView scannedValueTextView;
 
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
@@ -57,7 +57,7 @@ public class QrActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        textViewScannedValue = findViewById(R.id.textViewScannedValue);
+        scannedValueTextView = findViewById(R.id.scannedValueTextView);
         surfaceView = findViewById(R.id.surfaceView);
     }
 
@@ -114,14 +114,14 @@ public class QrActivity extends AppCompatActivity {
             @Override
             public void receiveDetections(@NonNull Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-                textViewScannedValue.post(() -> {
+                scannedValueTextView.post(() -> {
                     if (barcodes.size() == 0) {
-                        textViewScannedValue.setText(R.string.no_data);
+                        scannedValueTextView.setText(R.string.no_data);
                         return;
                     }
                     // TODO send request  
                     intentData = barcodes.valueAt(0).displayValue;
-                    textViewScannedValue.setText(intentData);
+                    scannedValueTextView.setText(intentData);
                 });
             }
         });
