@@ -41,6 +41,9 @@ public class QrActivity extends AppCompatActivity {
 
     private static final int REQUEST_CAMERA_PERMISSION = 201;
 
+    private int dayId;
+    private int eatingId;
+
     private SurfaceView surfaceView;
     private TextView scannedValueTextView;
 
@@ -52,7 +55,23 @@ public class QrActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
 
+        initReceivedExtras();
         initViews();
+    }
+
+    private void initReceivedExtras() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            dayId = extras.getInt("day_id");
+            eatingId = extras.getInt("eating_id");
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "An default args initialized",
+                    Toast.LENGTH_SHORT
+            ).show();
+            dayId = 1;
+            eatingId = 1;
+        }
     }
 
     private void initViews() {

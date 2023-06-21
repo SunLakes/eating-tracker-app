@@ -41,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         startButton = findViewById(R.id.start_button);
         startButton.setOnClickListener(view ->
-                startActivity(new Intent(MainActivity.this, QrActivity.class))
+                startActivity(
+                        new Intent(MainActivity.this, QrActivity.class)
+                                .putExtra("day_id", 2) // TODO stub
+                                .putExtra("eating_id", 2))
         );
     }
 }
