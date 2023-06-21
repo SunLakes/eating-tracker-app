@@ -46,7 +46,6 @@ public class QrActivity extends AppCompatActivity {
 
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
-    private String intentData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,12 +118,17 @@ public class QrActivity extends AppCompatActivity {
                         scannedValueTextView.setText(R.string.no_data);
                         return;
                     }
-                    // TODO send request  
-                    intentData = barcodes.valueAt(0).displayValue;
-                    scannedValueTextView.setText(intentData);
+                    System.out.println("recognized");
+                    final String data = barcodes.valueAt(0).displayValue;
+                    scannedValueTextView.setText(data);
+                    sendPostRequest(data);
                 });
             }
         });
+    }
+
+    private void sendPostRequest(final String data) {
+        // TODO send request
     }
 
     @Override
