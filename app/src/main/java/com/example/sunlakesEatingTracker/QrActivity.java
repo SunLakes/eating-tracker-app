@@ -19,7 +19,6 @@ package com.example.sunlakesEatingTracker;
 import static android.Manifest.permission.CAMERA;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.widget.Toast.LENGTH_SHORT;
-
 import static com.example.sunlakesEatingTracker.MainActivity.DAY_ID_KEY;
 import static com.example.sunlakesEatingTracker.MainActivity.EATING_ID_KEY;
 
@@ -57,6 +56,7 @@ public class QrActivity extends AppCompatActivity {
 
     private SurfaceView surfaceView;
     private TextView scannedValueTextView;
+    private TextView dayIdEatingIdTextView;
 
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
@@ -84,6 +84,8 @@ public class QrActivity extends AppCompatActivity {
 
     private void initViews() {
         scannedValueTextView = findViewById(R.id.scannedValueTextView);
+        dayIdEatingIdTextView = findViewById(R.id.dayIdEatingIdTextView);
+        dayIdEatingIdTextView.setText("day_id=" + dayId + ", eating_id=" + eatingId);
         surfaceView = findViewById(R.id.surfaceView);
     }
 
@@ -125,7 +127,7 @@ public class QrActivity extends AppCompatActivity {
                 cameraSource.stop();
             }
         });
-        barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
+        barcodeDetector.setProcessor(new Detector.Processor<>() {
 
             private String cachedLastData = "";
 
