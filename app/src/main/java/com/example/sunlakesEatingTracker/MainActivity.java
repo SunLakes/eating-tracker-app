@@ -16,6 +16,7 @@
 
 package com.example.sunlakesEatingTracker;
 
+import static android.widget.Toast.LENGTH_SHORT;
 import static com.example.sunlakesEatingTracker.R.id.day1Radio;
 import static com.example.sunlakesEatingTracker.R.id.day2Radio;
 import static com.example.sunlakesEatingTracker.R.id.day3Radio;
@@ -32,11 +33,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Map;
+import java.util.Optional;
+import java.util.TreeMap;
 
 /**
  * @author Mykhailo Balakhon
@@ -70,6 +77,31 @@ public class MainActivity extends AppCompatActivity {
             eating3Radio, 3
     );
 
+    private static final Map<LocalDate, Integer> dayDateDayId = Map.of(
+            LocalDate.of(2023, 06, 22), 1,
+            LocalDate.of(2023, 06, 23), 2,
+            LocalDate.of(2023, 06, 24), 3,
+            LocalDate.of(2023, 06, 25), 4,
+            LocalDate.of(2023, 06, 26), 5,
+            LocalDate.of(2023, 06, 27), 6,
+            LocalDate.of(2023, 06, 28), 7
+    );
+    /**
+     * Eating ranges:
+     * <p>
+     * breakfast:  00:00-11:00
+     * lunch:      12:00-14:00
+     * dinner:     15:00-24:00
+     */
+    private static final TreeMap<LocalTime, Integer> eatingTimeEatingId = new TreeMap<>(Map.of(
+            LocalTime.of(00, 00), 1,
+            LocalTime.of(11, 00), 1,
+            LocalTime.of(12, 00), 2,
+            LocalTime.of(14, 00), 2,
+            LocalTime.of(15, 00), 3,
+            LocalTime.of(24, 00), 3
+    ));
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +113,13 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         startButton = findViewById(R.id.start_button);
         startButton.setOnClickListener(view -> {
-            configureAllArguments();
+            try {
+                configureAllArguments();
+            } catch (DateTimeException e) {
+                e.printStackTrace();
+                showToast(e.getMessage());
+                return;
+            }
             startActivity(
                     new Intent(MainActivity.this, QrActivity.class)
                             .putExtra(DAY_ID_KEY, dayId)
@@ -93,16 +131,23 @@ public class MainActivity extends AppCompatActivity {
         autoCompleteSwitch = findViewById(R.id.autoCompleteSwitch);
     }
 
-    private void configureAllArguments() {
+    private void configureAllArguments() throws DateTimeException {
         if (autoCompleteSwitch.isChecked()) {
-            dayId = 1; // FIXME stub
-            eatingId = 1; // TODO implement auto-completion by today date
+            configureDayAndEatingByDate();
             return;
         }
         final int dayRadioId = dayRadioGroup.getCheckedRadioButtonId();
         dayId = dayRadioIdDayId.get(dayRadioId);
         final int eatingRadioId = eatingRadioGroup.getCheckedRadioButtonId();
         eatingId = eatingRadioIdEatingId.get(eatingRadioId);
+    }
+
+    private void configureDayAndEatingByDate() throws DateTimeException {
+        dayId = Optional.ofNullable(dayDateDayId.get(LocalDate.now()))
+                .orElseThrow(() -> new DateTimeException("Current day isn't day of the festival"));
+        eatingId = Optional.ofNullable(
+                eatingTimeEatingId.ceilingEntry(LocalTime.now()).getValue()
+        ).orElseThrow(() -> new DateTimeException("Current time have problems"));
     }
 
     public void checkIfEnabled(final View view) {
@@ -117,5 +162,14 @@ public class MainActivity extends AppCompatActivity {
             childAt.setClickable(state);
             childAt.setEnabled(state);
         }
+    }
+
+    private void showToast(final String message) {
+        runOnUiThread(() ->
+                Toast.makeText(getApplicationContext(),
+                        message,
+                        LENGTH_SHORT
+                ).show()
+        );
     }
 }
