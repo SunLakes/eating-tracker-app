@@ -18,6 +18,7 @@ package com.example.sunlakesEatingTracker;
 
 import static android.Manifest.permission.CAMERA;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static android.widget.Toast.LENGTH_SHORT;
 
 import android.os.Bundle;
 import android.util.SparseArray;
@@ -73,10 +74,7 @@ public class QrActivity extends AppCompatActivity {
             dayId = extras.getInt("day_id");
             eatingId = extras.getInt("eating_id");
         } else {
-            Toast.makeText(getApplicationContext(),
-                    "An default args initialized",
-                    Toast.LENGTH_SHORT
-            ).show();
+            showToast("An default args initialized");
             dayId = 1;
             eatingId = 1;
         }
@@ -88,10 +86,7 @@ public class QrActivity extends AppCompatActivity {
     }
 
     private void initialiseDetectorsAndSources() {
-        Toast.makeText(getApplicationContext(),
-                "Barcode scanner started",
-                Toast.LENGTH_SHORT
-        ).show();
+        showToast("Barcode scanner started");
 
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
@@ -134,10 +129,7 @@ public class QrActivity extends AppCompatActivity {
 
             @Override
             public void release() {
-                Toast.makeText(getApplicationContext(),
-                        "To prevent memory leaks barcode scanner has been stopped",
-                        Toast.LENGTH_SHORT
-                ).show();
+                showToast("To prevent memory leaks barcode scanner has been stopped");
             }
 
             @Override
@@ -167,10 +159,7 @@ public class QrActivity extends AppCompatActivity {
         try {
             braceletId = Integer.parseInt(data);
         } catch (NumberFormatException e) {
-            Toast.makeText(getApplicationContext(),
-                    "Not a number",
-                    Toast.LENGTH_SHORT
-            ).show();
+            showToast("Not a number");
             return;
         }
         final Entry entry = new Entry(
@@ -184,30 +173,33 @@ public class QrActivity extends AppCompatActivity {
                     "http://192.168.1.50:8080/eating", objectMapper
             ).execute(entry).get();
             if (optionalError.isPresent()) {
-                // TODO generalize dialog creation
-                new AlertDialog.Builder(this)
-                        .setTitle("Error")
-                        .setMessage(optionalError.get().toString())
-                        .setNegativeButton("OK",
-                                (dialog, which) -> dialog.dismiss())
-                        .create()
-                        .show();
+                showErrorDialog(optionalError.get().toString());
             } else {
-                Toast.makeText(getApplicationContext(),
-                        entry.getBraceletId() + " OK",
-                        Toast.LENGTH_SHORT
-                ).show();
+                showToast(entry.getBraceletId() + " OK");
             }
         } catch (ExecutionException | InterruptedException e) {
-            // TODO generalize dialog creation
-            new AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage(e.getMessage())
-                    .setNegativeButton("OK",
-                            (dialog, which) -> dialog.dismiss())
-                    .create()
-                    .show();
+            showErrorDialog(e.getMessage());
         }
+    }
+
+    private void showErrorDialog(final String message) {
+        runOnUiThread(() ->
+                new AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage(message)
+                        .setNegativeButton("OK",
+                                (dialog, which) -> dialog.dismiss())
+                        .create().show()
+        );
+    }
+
+    private void showToast(final String message) {
+        runOnUiThread(() ->
+                Toast.makeText(getApplicationContext(),
+                        message,
+                        LENGTH_SHORT
+                ).show()
+        );
     }
 
     @Override
