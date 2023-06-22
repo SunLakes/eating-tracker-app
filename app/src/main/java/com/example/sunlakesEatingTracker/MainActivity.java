@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         startButton = findViewById(R.id.start_button);
-        startButton.setOnClickListener(view -> {
+        startButton.setOnClickListener(ignored -> {
             try {
                 configureAllArguments();
             } catch (DateTimeException e) {
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         ).orElseThrow(() -> new DateTimeException("Current time have problems"));
     }
 
-    public void disableRadioIfChecked(final View view) {
+    public void disableRadioIfChecked(final View ignored) {
         final boolean state = !autoCompleteSwitch.isChecked();
         setClickableState(dayRadioGroup, state);
         setClickableState(eatingRadioGroup, state);
