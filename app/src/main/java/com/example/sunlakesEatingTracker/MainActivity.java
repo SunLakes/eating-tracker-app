@@ -44,6 +44,9 @@ import java.util.Map;
  */
 public class MainActivity extends AppCompatActivity {
 
+    public final static String DAY_ID_KEY = "day_id";
+    public final static String EATING_ID_KEY = "eating_id";
+
     private Button startButton;
     private RadioGroup dayRadioGroup;
     private RadioGroup eatingRadioGroup;
@@ -61,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
             day6Radio, 6,
             day7Radio, 7
     );
-
     private static final Map<Integer, Integer> eatingRadioIdEatingId = Map.of(
             eating1Radio, 1,
             eating2Radio, 2,
@@ -82,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
             configureAllArguments();
             startActivity(
                     new Intent(MainActivity.this, QrActivity.class)
-                            .putExtra("day_id", dayId) // TODO make key constant
-                            .putExtra("eating_id", eatingId)
+                            .putExtra(DAY_ID_KEY, dayId)
+                            .putExtra(EATING_ID_KEY, eatingId)
             );
         });
         dayRadioGroup = findViewById(R.id.dayRadioGroup);

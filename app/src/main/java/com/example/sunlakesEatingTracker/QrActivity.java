@@ -20,6 +20,9 @@ import static android.Manifest.permission.CAMERA;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.widget.Toast.LENGTH_SHORT;
 
+import static com.example.sunlakesEatingTracker.MainActivity.DAY_ID_KEY;
+import static com.example.sunlakesEatingTracker.MainActivity.EATING_ID_KEY;
+
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
@@ -70,8 +73,8 @@ public class QrActivity extends AppCompatActivity {
     private void initReceivedExtras() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            dayId = extras.getInt("day_id");
-            eatingId = extras.getInt("eating_id");
+            dayId = extras.getInt(DAY_ID_KEY);
+            eatingId = extras.getInt(EATING_ID_KEY);
         } else {
             dayId = 1;
             eatingId = 1;
