@@ -135,21 +135,21 @@ public class QrActivity extends AppCompatActivity {
             @Override
             public void receiveDetections(@NonNull Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-                scannedValueTextView.post(() -> {
-                    if (barcodes.size() == 0) {
-                        scannedValueTextView.setText(R.string.no_data);
-                        return;
-                    }
+                if (barcodes.size() == 0) {
+                    scannedValueTextView.post(() ->
+                            scannedValueTextView.setText(R.string.no_data));
+                    return;
+                }
 
-                    final String data = barcodes.valueAt(0).displayValue;
-                    scannedValueTextView.setText(data);
+                final String data = barcodes.valueAt(0).displayValue;
+                scannedValueTextView.post(() ->
+                        scannedValueTextView.setText(data));
 
-                    if (!cachedLastData.equals(data)) {
-                        cachedLastData = data;
-                        System.out.println("recognized new");
-                        sendPostRequest(data);
-                    }
-                });
+                if (!cachedLastData.equals(data)) {
+                    cachedLastData = data;
+                    System.out.println("recognized new");
+                    sendPostRequest(data);
+                }
             }
         });
     }
