@@ -46,6 +46,10 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * @author Mykhailo Balakhon
+ * @link t.me/mibal_ua
+ */
 public class QrActivity extends AppCompatActivity {
 
     private static final int REQUEST_CAMERA_PERMISSION = 201;

@@ -21,6 +21,10 @@ import java.time.LocalTime;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * @author Mykhailo Balakhon
+ * @link t.me/mibal_ua
+ */
 public class FestivalConfig {
 
     public static final Map<LocalDate, Integer> dayDateDayId = Map.of(

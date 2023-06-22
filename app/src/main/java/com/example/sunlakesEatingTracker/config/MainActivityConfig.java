@@ -29,6 +29,10 @@ import static com.example.sunlakesEatingTracker.R.id.eating3Radio;
 
 import java.util.Map;
 
+/**
+ * @author Mykhailo Balakhon
+ * @link t.me/mibal_ua
+ */
 public class MainActivityConfig {
 
     public static final Map<Integer, Integer> dayRadioIdDayId = Map.of(

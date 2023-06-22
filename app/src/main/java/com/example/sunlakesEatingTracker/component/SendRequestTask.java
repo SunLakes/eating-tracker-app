@@ -32,6 +32,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * @author Mykhailo Balakhon
+ * @link t.me/mibal_ua
+ */
 public class SendRequestTask extends AsyncTask<Entry, Integer, Optional<ApiError>> {
 
     private final ObjectMapper objectMapper;
