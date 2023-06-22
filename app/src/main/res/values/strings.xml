@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">sunlakes-eating-tracker</string>
     <string name="no_data">No data</string>
+    <string name="main_activity_day_id_switch_text">Select day</string>
+    <string name="main_activity_day_1_name">1</string>
+    <string name="main_activity_day_2_name">2</string>
+    <string name="main_activity_day_3_name">3</string>
+    <string name="main_activity_day_4_name">4</string>
+    <string name="main_activity_day_5_name">5</string>
+    <string name="main_activity_day_6_name">6</string>
+    <string name="main_activity_day_7_name">7</string>
+    <string name="main_activity_eating_id_switch_text">Select eating</string>
+    <string name="main_activity_eating_1_name">1</string>
+    <string name="main_activity_eating_2_name">2</string>
+    <string name="main_activity_eating_3_name">3</string>
+    <string name="main_activity_mode_switch_text">auto-complete</string>
+    <string name="main_activity_start_button_text">Let\'s scan!</string>
 </resources>

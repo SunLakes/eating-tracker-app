@@ -16,11 +16,27 @@
 
 package com.example.sunlakesEatingTracker;
 
+import static com.example.sunlakesEatingTracker.R.id.day1Radio;
+import static com.example.sunlakesEatingTracker.R.id.day2Radio;
+import static com.example.sunlakesEatingTracker.R.id.day3Radio;
+import static com.example.sunlakesEatingTracker.R.id.day4Radio;
+import static com.example.sunlakesEatingTracker.R.id.day5Radio;
+import static com.example.sunlakesEatingTracker.R.id.day6Radio;
+import static com.example.sunlakesEatingTracker.R.id.day7Radio;
+import static com.example.sunlakesEatingTracker.R.id.eating1Radio;
+import static com.example.sunlakesEatingTracker.R.id.eating2Radio;
+import static com.example.sunlakesEatingTracker.R.id.eating3Radio;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
+
+import java.util.Map;
 
 /**
  * @author Mykhailo Balakhon
@@ -29,6 +45,28 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private Button startButton;
+    private RadioGroup dayRadioGroup;
+    private RadioGroup eatingRadioGroup;
+    private SwitchCompat autoCompleteSwitch;
+
+    private int dayId;
+    private int eatingId;
+
+    private static final Map<Integer, Integer> dayRadioIdDayId = Map.of(
+            day1Radio, 1,
+            day2Radio, 2,
+            day3Radio, 3,
+            day4Radio, 4,
+            day5Radio, 5,
+            day6Radio, 6,
+            day7Radio, 7
+    );
+
+    private static final Map<Integer, Integer> eatingRadioIdEatingId = Map.of(
+            eating1Radio, 1,
+            eating2Radio, 2,
+            eating3Radio, 3
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +78,42 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         startButton = findViewById(R.id.start_button);
-        startButton.setOnClickListener(view ->
-                startActivity(
-                        new Intent(MainActivity.this, QrActivity.class)
-                                .putExtra("day_id", 2) // TODO stub
-                                .putExtra("eating_id", 2))
-        );
+        startButton.setOnClickListener(view -> {
+            configureAllArguments();
+            startActivity(
+                    new Intent(MainActivity.this, QrActivity.class)
+                            .putExtra("day_id", dayId) // TODO make key constant
+                            .putExtra("eating_id", eatingId)
+            );
+        });
+        dayRadioGroup = findViewById(R.id.dayRadioGroup);
+        eatingRadioGroup = findViewById(R.id.eatingRadioGroup);
+        autoCompleteSwitch = findViewById(R.id.autoCompleteSwitch);
+    }
+
+    private void configureAllArguments() {
+        if (autoCompleteSwitch.isChecked()) {
+            dayId = 1; // FIXME stub
+            eatingId = 1; // TODO implement auto-completion by today date
+            return;
+        }
+        final int dayRadioId = dayRadioGroup.getCheckedRadioButtonId();
+        dayId = dayRadioIdDayId.get(dayRadioId);
+        final int eatingRadioId = eatingRadioGroup.getCheckedRadioButtonId();
+        eatingId = eatingRadioIdEatingId.get(eatingRadioId);
+    }
+
+    public void checkIfEnabled(final View view) {
+        final boolean state = !autoCompleteSwitch.isChecked();
+        setClickableState(dayRadioGroup, state);
+        setClickableState(eatingRadioGroup, state);
+    }
+
+    private void setClickableState(final RadioGroup radioGroup, final boolean state) {
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            final View childAt = radioGroup.getChildAt(i);
+            childAt.setClickable(state);
+            childAt.setEnabled(state);
+        }
     }
 }
