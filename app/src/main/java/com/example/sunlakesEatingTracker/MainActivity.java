@@ -32,6 +32,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.TreeMap;
 
@@ -113,13 +115,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         startButton = findViewById(R.id.start_button);
         startButton.setOnClickListener(ignored -> {
-            try {
-                configureAllArguments();
-            } catch (DateTimeException e) {
-                e.printStackTrace();
-                showToast(e.getMessage());
-                return;
-            }
+            configureAllArguments();
             startActivity(
                     new Intent(MainActivity.this, QrActivity.class)
                             .putExtra(DAY_ID_KEY, dayId)
@@ -129,25 +125,41 @@ public class MainActivity extends AppCompatActivity {
         dayRadioGroup = findViewById(R.id.dayRadioGroup);
         eatingRadioGroup = findViewById(R.id.eatingRadioGroup);
         autoCompleteSwitch = findViewById(R.id.autoCompleteSwitch);
+
+        predefineArgumentsViaDate();
     }
 
     private void configureAllArguments() throws DateTimeException {
-        if (autoCompleteSwitch.isChecked()) {
-            configureDayAndEatingByDate();
-            return;
-        }
         final int dayRadioId = dayRadioGroup.getCheckedRadioButtonId();
         dayId = dayRadioIdDayId.get(dayRadioId);
         final int eatingRadioId = eatingRadioGroup.getCheckedRadioButtonId();
         eatingId = eatingRadioIdEatingId.get(eatingRadioId);
     }
 
-    private void configureDayAndEatingByDate() throws DateTimeException {
-        dayId = Optional.ofNullable(dayDateDayId.get(LocalDate.now()))
-                .orElseThrow(() -> new DateTimeException("Current day isn't day of the festival"));
-        eatingId = Optional.ofNullable(
+    private void predefineArgumentsViaDate() {
+        int predefinedDayId = Optional.ofNullable(dayDateDayId.get(LocalDate.now()))
+                .orElse(1);
+        int predefinedEatingId = Optional.ofNullable(
                 eatingTimeEatingId.ceilingEntry(LocalTime.now()).getValue()
-        ).orElseThrow(() -> new DateTimeException("Current time have problems"));
+        ).orElse(1);
+        int dayRadioId = dayRadioIdDayId.entrySet()
+                .stream()
+                .filter(entry -> predefinedDayId == entry.getValue())
+                .map(Entry::getKey)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "RadioButton that corresponds to day_id=%d doesn't exists"));
+        int eatingRadioId = eatingRadioIdEatingId.entrySet()
+                .stream()
+                .filter(entry -> predefinedEatingId == entry.getValue())
+                .map(Entry::getKey)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "RadioButton that corresponds to eating_id=%d doesn't exists"));
+        RadioButton dayRadioButton = findViewById(dayRadioId);
+        RadioButton eatingRadioButton = findViewById(eatingRadioId);
+        dayRadioButton.setChecked(true);
+        eatingRadioButton.setChecked(true);
     }
 
     public void disableRadioIfChecked(final View ignored) {
