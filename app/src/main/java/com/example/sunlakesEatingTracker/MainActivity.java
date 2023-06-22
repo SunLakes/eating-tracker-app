@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         ).orElseThrow(() -> new DateTimeException("Current time have problems"));
     }
 
-    public void checkIfEnabled(final View view) {
+    public void disableRadioIfChecked(final View view) {
         final boolean state = !autoCompleteSwitch.isChecked();
         setClickableState(dayRadioGroup, state);
         setClickableState(eatingRadioGroup, state);
