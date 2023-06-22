@@ -6,106 +6,114 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-    <RadioGroup
-            android:id="@+id/dayRadioGroup"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/start_button"
             app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-                android:id="@+id/dayRadioText"
-                android:layout_width="match_parent"
+        <RadioGroup
+                android:id="@+id/dayRadioGroup"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/main_activity_day_id_switch_text" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <RadioButton
-                android:id="@+id/day1Radio"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:checked="true"
-                android:text="@string/main_activity_day_1_name" />
+            <TextView
+                    android:id="@+id/dayRadioText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_activity_day_id_switch_text" />
 
-        <RadioButton
-                android:id="@+id/day2Radio"
-                android:layout_width="match_parent"
+            <RadioButton
+                    android:id="@+id/day1Radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:checked="true"
+                    android:text="@string/main_activity_day_1_name" />
+
+            <RadioButton
+                    android:id="@+id/day2Radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_activity_day_2_name" />
+
+            <RadioButton
+                    android:id="@+id/day3Radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/main_activity_day_3_name" />
+
+            <RadioButton
+                    android:id="@+id/day4Radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/main_activity_day_4_name" />
+
+            <RadioButton
+                    android:id="@+id/day5Radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/main_activity_day_5_name" />
+
+            <RadioButton
+                    android:id="@+id/day6Radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/main_activity_day_6_name" />
+
+            <RadioButton
+                    android:id="@+id/day7Radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/main_activity_day_7_name" />
+        </RadioGroup>
+
+        <RadioGroup
+                android:id="@+id/eatingRadioGroup"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/main_activity_day_2_name" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dayRadioGroup"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="32dp">
 
-        <RadioButton
-                android:id="@+id/day3Radio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/main_activity_day_3_name" />
+            <TextView
+                    android:id="@+id/difficultyRadioText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_activity_eating_id_switch_text" />
 
-        <RadioButton
-                android:id="@+id/day4Radio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/main_activity_day_4_name" />
+            <RadioButton
+                    android:id="@+id/eating1Radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:checked="true"
+                    android:text="@string/main_activity_day_1_name" />
 
-        <RadioButton
-                android:id="@+id/day5Radio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/main_activity_day_5_name" />
+            <RadioButton
+                    android:id="@+id/eating2Radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_activity_day_2_name" />
 
-        <RadioButton
-                android:id="@+id/day6Radio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/main_activity_day_6_name" />
+            <RadioButton
+                    android:id="@+id/eating3Radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/main_activity_day_3_name" />
+        </RadioGroup>
 
-        <RadioButton
-                android:id="@+id/day7Radio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/main_activity_day_7_name" />
-    </RadioGroup>
-
-    <RadioGroup
-            android:id="@+id/eatingRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/dayRadioGroup"
-            android:layout_marginStart="32dp">
-
-        <TextView
-                android:id="@+id/difficultyRadioText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/main_activity_eating_id_switch_text" />
-
-        <RadioButton
-                android:id="@+id/eating1Radio"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:checked="true"
-                android:text="@string/main_activity_day_1_name" />
-
-        <RadioButton
-                android:id="@+id/eating2Radio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/main_activity_day_2_name" />
-
-        <RadioButton
-                android:id="@+id/eating3Radio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/main_activity_day_3_name" />
-    </RadioGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
             android:id="@+id/start_button"
@@ -117,5 +125,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.789" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
