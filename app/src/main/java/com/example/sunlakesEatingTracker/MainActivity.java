@@ -17,16 +17,10 @@
 package com.example.sunlakesEatingTracker;
 
 import static android.widget.Toast.LENGTH_SHORT;
-import static com.example.sunlakesEatingTracker.R.id.day1Radio;
-import static com.example.sunlakesEatingTracker.R.id.day2Radio;
-import static com.example.sunlakesEatingTracker.R.id.day3Radio;
-import static com.example.sunlakesEatingTracker.R.id.day4Radio;
-import static com.example.sunlakesEatingTracker.R.id.day5Radio;
-import static com.example.sunlakesEatingTracker.R.id.day6Radio;
-import static com.example.sunlakesEatingTracker.R.id.day7Radio;
-import static com.example.sunlakesEatingTracker.R.id.eating1Radio;
-import static com.example.sunlakesEatingTracker.R.id.eating2Radio;
-import static com.example.sunlakesEatingTracker.R.id.eating3Radio;
+import static com.example.sunlakesEatingTracker.config.FestivalConfig.dayDateDayId;
+import static com.example.sunlakesEatingTracker.config.FestivalConfig.eatingTimeEatingId;
+import static com.example.sunlakesEatingTracker.config.MainActivityConfig.dayRadioIdDayId;
+import static com.example.sunlakesEatingTracker.config.MainActivityConfig.eatingRadioIdEatingId;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,10 +36,8 @@ import androidx.appcompat.widget.SwitchCompat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.TreeMap;
 
 /**
  * @author Mykhailo Balakhon
@@ -63,46 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
     private int dayId;
     private int eatingId;
-
-    private static final Map<Integer, Integer> dayRadioIdDayId = Map.of(
-            day1Radio, 1,
-            day2Radio, 2,
-            day3Radio, 3,
-            day4Radio, 4,
-            day5Radio, 5,
-            day6Radio, 6,
-            day7Radio, 7
-    );
-    private static final Map<Integer, Integer> eatingRadioIdEatingId = Map.of(
-            eating1Radio, 1,
-            eating2Radio, 2,
-            eating3Radio, 3
-    );
-
-    private static final Map<LocalDate, Integer> dayDateDayId = Map.of(
-            LocalDate.of(2023, 06, 22), 1,
-            LocalDate.of(2023, 06, 23), 2,
-            LocalDate.of(2023, 06, 24), 3,
-            LocalDate.of(2023, 06, 25), 4,
-            LocalDate.of(2023, 06, 26), 5,
-            LocalDate.of(2023, 06, 27), 6,
-            LocalDate.of(2023, 06, 28), 7
-    );
-    /**
-     * Eating ranges:
-     * <p>
-     * breakfast:  00:00-11:00
-     * lunch:      11:01-14:00
-     * dinner:     14:01-23:59
-     */
-    private static final TreeMap<LocalTime, Integer> eatingTimeEatingId = new TreeMap<>(Map.of(
-            LocalTime.of(00, 00), 1,
-            LocalTime.of(11, 00), 1,
-            LocalTime.of(11, 01), 2,
-            LocalTime.of(14, 00), 2,
-            LocalTime.of(14, 01), 3,
-            LocalTime.of(23, 59), 3
-    ));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
