@@ -24,14 +24,12 @@ import static com.example.sunlakesEatingTracker.config.MainActivityConfig.eating
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     private Button startButton;
     private RadioGroup dayRadioGroup;
     private RadioGroup eatingRadioGroup;
-    private SwitchCompat autoCompleteSwitch;
 
     private int dayId;
     private int eatingId;
@@ -76,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         });
         dayRadioGroup = findViewById(R.id.dayRadioGroup);
         eatingRadioGroup = findViewById(R.id.eatingRadioGroup);
-        autoCompleteSwitch = findViewById(R.id.autoCompleteSwitch);
 
         predefineArgumentsViaDate();
     }
@@ -112,20 +108,6 @@ public class MainActivity extends AppCompatActivity {
         RadioButton eatingRadioButton = findViewById(eatingRadioId);
         dayRadioButton.setChecked(true);
         eatingRadioButton.setChecked(true);
-    }
-
-    public void disableRadioIfChecked(final View ignored) {
-        final boolean state = !autoCompleteSwitch.isChecked();
-        setClickableState(dayRadioGroup, state);
-        setClickableState(eatingRadioGroup, state);
-    }
-
-    private void setClickableState(final RadioGroup radioGroup, final boolean state) {
-        for (int i = 0; i < radioGroup.getChildCount(); i++) {
-            final View childAt = radioGroup.getChildAt(i);
-            childAt.setClickable(state);
-            childAt.setEnabled(state);
-        }
     }
 
     private void showToast(final String message) {
