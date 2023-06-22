@@ -90,15 +90,15 @@ public class MainActivity extends AppCompatActivity {
      * Eating ranges:
      * <p>
      * breakfast:  00:00-11:00
-     * lunch:      12:00-14:00
-     * dinner:     15:00-23:59
+     * lunch:      11:01-14:00
+     * dinner:     14:01-23:59
      */
     private static final TreeMap<LocalTime, Integer> eatingTimeEatingId = new TreeMap<>(Map.of(
             LocalTime.of(00, 00), 1,
             LocalTime.of(11, 00), 1,
-            LocalTime.of(12, 00), 2,
+            LocalTime.of(11, 01), 2,
             LocalTime.of(14, 00), 2,
-            LocalTime.of(15, 00), 3,
+            LocalTime.of(14, 01), 3,
             LocalTime.of(23, 59), 3
     ));
 
