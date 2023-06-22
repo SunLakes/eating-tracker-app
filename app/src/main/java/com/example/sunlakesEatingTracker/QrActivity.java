@@ -73,10 +73,10 @@ public class QrActivity extends AppCompatActivity {
             dayId = extras.getInt("day_id");
             eatingId = extras.getInt("eating_id");
         } else {
-            showToast("An default args initialized");
             dayId = 1;
             eatingId = 1;
         }
+        showToast("day_id=" + dayId + ", eating_id=" + eatingId);
     }
 
     private void initViews() {
