@@ -43,7 +43,6 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 public class QrActivity extends AppCompatActivity {
 
@@ -177,7 +176,8 @@ public class QrActivity extends AppCompatActivity {
             } else {
                 showToast(entry.getBraceletId() + " OK");
             }
-        } catch (ExecutionException | InterruptedException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             showErrorDialog(e.getMessage());
         }
     }
