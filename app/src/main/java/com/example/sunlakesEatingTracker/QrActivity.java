@@ -22,6 +22,8 @@ import static android.widget.Toast.LENGTH_SHORT;
 import static com.example.sunlakesEatingTracker.MainActivity.DAY_ID_KEY;
 import static com.example.sunlakesEatingTracker.MainActivity.EATING_ID_KEY;
 
+import static java.lang.String.format;
+
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
@@ -89,7 +91,9 @@ public class QrActivity extends AppCompatActivity {
     private void initViews() {
         scannedValueTextView = findViewById(R.id.scannedValueTextView);
         dayIdEatingIdTextView = findViewById(R.id.dayIdEatingIdTextView);
-        dayIdEatingIdTextView.setText("day_id=" + dayId + ", eating_id=" + eatingId);
+        dayIdEatingIdTextView.setText(format(
+                getString(R.string.day_id_eating_id_template), dayId, eatingId
+        ));
         surfaceView = findViewById(R.id.surfaceView);
     }
 
