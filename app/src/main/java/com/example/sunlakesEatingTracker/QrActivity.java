@@ -96,6 +96,18 @@ public class QrActivity extends AppCompatActivity {
         surfaceView = findViewById(R.id.surfaceView);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initialiseDetectorsAndSources();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cameraSource.release();
+    }
+
     private void initialiseDetectorsAndSources() {
 //        showToast("Barcode scanner started");
 
@@ -213,15 +225,4 @@ public class QrActivity extends AppCompatActivity {
         );
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cameraSource.release();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initialiseDetectorsAndSources();
-    }
 }
