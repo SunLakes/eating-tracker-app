@@ -72,10 +72,9 @@ public class MainActivity extends AppCompatActivity {
         startButton = findViewById(R.id.start_button);
         startButton.setOnClickListener(ignored -> {
             configureAllArguments();
-            startActivity(
-                    new Intent(MainActivity.this, QrActivity.class)
-                            .putExtra(DAY_ID_KEY, dayId)
-                            .putExtra(EATING_ID_KEY, eatingId)
+            startActivity(new Intent(MainActivity.this, QrActivity.class)
+                    .putExtra(DAY_ID_KEY, dayId)
+                    .putExtra(EATING_ID_KEY, eatingId)
             );
         });
         dayRadioGroup = findViewById(R.id.dayRadioGroup);
@@ -87,8 +86,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void predefineArgumentsViaDate() {
-        int predefinedDayId = Optional.ofNullable(dayDateDayId.get(LocalDate.now()))
-                .orElse(1);
+        int predefinedDayId = Optional.ofNullable(
+                dayDateDayId.get(LocalDate.now())
+        ).orElse(1);
         int predefinedEatingId = Optional.ofNullable(
                 eatingTimeEatingId.ceilingEntry(LocalTime.now()).getValue()
         ).orElse(1);
@@ -98,14 +98,16 @@ public class MainActivity extends AppCompatActivity {
                 .map(Entry::getKey)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "RadioButton that corresponds to day_id=%d doesn't exists"));
+                        "RadioButton that corresponds to day_id=%d doesn't exists"
+                ));
         int eatingRadioId = eatingRadioIdEatingId.entrySet()
                 .stream()
                 .filter(entry -> predefinedEatingId == entry.getValue())
                 .map(Entry::getKey)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "RadioButton that corresponds to eating_id=%d doesn't exists"));
+                        "RadioButton that corresponds to eating_id=%d doesn't exists"
+                ));
         RadioButton dayRadioButton = findViewById(dayRadioId);
         RadioButton eatingRadioButton = findViewById(eatingRadioId);
         dayRadioButton.setChecked(true);
@@ -133,8 +135,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showToast(final String message) {
-        runOnUiThread(() ->
-                Toast.makeText(getApplicationContext(),
+        runOnUiThread(() -> Toast.makeText(
+                        getApplicationContext(),
                         message,
                         LENGTH_SHORT
                 ).show()
