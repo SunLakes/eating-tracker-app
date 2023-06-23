@@ -35,7 +35,7 @@ import java.util.Map;
  */
 public class MainActivityConfig {
 
-    public static final Map<Integer, Integer> dayRadioIdDayId = Map.of(
+    public static final Map<Integer, Integer> dayRadioIdToDayId = Map.of(
             day1Radio, 1,
             day2Radio, 2,
             day3Radio, 3,
@@ -45,7 +45,7 @@ public class MainActivityConfig {
             day7Radio, 7
     );
 
-    public static final Map<Integer, Integer> eatingRadioIdEatingId = Map.of(
+    public static final Map<Integer, Integer> eatingRadioIdToEatingId = Map.of(
             eating1Radio, 1,
             eating2Radio, 2,
             eating3Radio, 3

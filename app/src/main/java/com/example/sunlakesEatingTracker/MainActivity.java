@@ -19,8 +19,8 @@ package com.example.sunlakesEatingTracker;
 import static android.widget.Toast.LENGTH_SHORT;
 import static com.example.sunlakesEatingTracker.config.FestivalConfig.dayDateDayId;
 import static com.example.sunlakesEatingTracker.config.FestivalConfig.eatingTimeEatingId;
-import static com.example.sunlakesEatingTracker.config.MainActivityConfig.dayRadioIdDayId;
-import static com.example.sunlakesEatingTracker.config.MainActivityConfig.eatingRadioIdEatingId;
+import static com.example.sunlakesEatingTracker.config.MainActivityConfig.dayRadioIdToDayId;
+import static com.example.sunlakesEatingTracker.config.MainActivityConfig.eatingRadioIdToEatingId;
 import static com.example.sunlakesEatingTracker.config.ServerConfig.SERVER_URL;
 import static java.lang.String.format;
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         int predefinedEatingId = Optional.ofNullable(
                 eatingTimeEatingId.ceilingEntry(LocalTime.now()).getValue()
         ).orElse(1);
-        int dayRadioId = dayRadioIdDayId.entrySet()
+        int dayRadioId = dayRadioIdToDayId.entrySet()
                 .stream()
                 .filter(entry -> predefinedDayId == entry.getValue())
                 .map(Entry::getKey)
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 .orElseThrow(() -> new IllegalArgumentException(
                         "RadioButton that corresponds to day_id=%d doesn't exists"
                 ));
-        int eatingRadioId = eatingRadioIdEatingId.entrySet()
+        int eatingRadioId = eatingRadioIdToEatingId.entrySet()
                 .stream()
                 .filter(entry -> predefinedEatingId == entry.getValue())
                 .map(Entry::getKey)
@@ -129,9 +129,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void configureAllArguments() throws DateTimeException {
         final int dayRadioId = dayRadioGroup.getCheckedRadioButtonId();
-        dayId = dayRadioIdDayId.get(dayRadioId);
+        dayId = dayRadioIdToDayId.get(dayRadioId);
         final int eatingRadioId = eatingRadioGroup.getCheckedRadioButtonId();
-        eatingId = eatingRadioIdEatingId.get(eatingRadioId);
+        eatingId = eatingRadioIdToEatingId.get(eatingRadioId);
     }
 
     private void showToast(final String message) {
