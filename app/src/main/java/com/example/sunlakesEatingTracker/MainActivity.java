@@ -86,26 +86,6 @@ public class MainActivity extends AppCompatActivity {
         checkServerUrlConnection();
     }
 
-    private void checkServerUrlConnection() {
-        try {
-            final boolean isExistsConnection = new IsExistsConnectionTask()
-                    .execute(SERVER_URL).get();
-            urlTextView.setText(isExistsConnection
-                    ? SERVER_URL
-                    : format("Connection to" + "\n%s\n" + "doesn't exists", SERVER_URL)
-            );
-        } catch (ExecutionException | InterruptedException e) {
-            showToast(e.getMessage());
-        }
-    }
-
-    private void configureAllArguments() throws DateTimeException {
-        final int dayRadioId = dayRadioGroup.getCheckedRadioButtonId();
-        dayId = dayRadioIdDayId.get(dayRadioId);
-        final int eatingRadioId = eatingRadioGroup.getCheckedRadioButtonId();
-        eatingId = eatingRadioIdEatingId.get(eatingRadioId);
-    }
-
     private void predefineArgumentsViaDate() {
         int predefinedDayId = Optional.ofNullable(dayDateDayId.get(LocalDate.now()))
                 .orElse(1);
@@ -130,6 +110,26 @@ public class MainActivity extends AppCompatActivity {
         RadioButton eatingRadioButton = findViewById(eatingRadioId);
         dayRadioButton.setChecked(true);
         eatingRadioButton.setChecked(true);
+    }
+
+    private void checkServerUrlConnection() {
+        try {
+            final boolean isExistsConnection = new IsExistsConnectionTask()
+                    .execute(SERVER_URL).get();
+            urlTextView.setText(isExistsConnection
+                    ? SERVER_URL
+                    : format("Connection to" + "\n%s\n" + "doesn't exists", SERVER_URL)
+            );
+        } catch (ExecutionException | InterruptedException e) {
+            showToast(e.getMessage());
+        }
+    }
+
+    private void configureAllArguments() throws DateTimeException {
+        final int dayRadioId = dayRadioGroup.getCheckedRadioButtonId();
+        dayId = dayRadioIdDayId.get(dayRadioId);
+        final int eatingRadioId = eatingRadioGroup.getCheckedRadioButtonId();
+        eatingId = eatingRadioIdEatingId.get(eatingRadioId);
     }
 
     private void showToast(final String message) {
