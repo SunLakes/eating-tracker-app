@@ -29,9 +29,10 @@ public class IsExistsConnectionTask extends AsyncTask<String, Integer, Boolean> 
 
     @Override
     protected Boolean doInBackground(final String... urls) {
+        HttpURLConnection connection = null;
         try {
             URL url = new URL(urls[0]);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("HEAD");
 
             int responseCode = connection.getResponseCode();
@@ -39,6 +40,10 @@ public class IsExistsConnectionTask extends AsyncTask<String, Integer, Boolean> 
                    responseCode == HTTP_BAD_METHOD;
         } catch (IOException e) {
             return false;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
     }
 }
