@@ -178,7 +178,6 @@ public class QrActivity extends AppCompatActivity {
         try {
             braceletId = Integer.parseInt(data);
         } catch (NumberFormatException e) {
-            showToast("Not a number");
             return;
         }
         final Entry entry = new Entry(
