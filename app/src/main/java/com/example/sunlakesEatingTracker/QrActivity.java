@@ -199,7 +199,7 @@ public class QrActivity extends AppCompatActivity {
                 new AlertDialog.Builder(this)
                         .setTitle("Error")
                         .setMessage(message)
-                        .setNegativeButton("OK",
+                        .setPositiveButton("OK",
                                 (dialog, which) -> dialog.dismiss())
                         .create().show()
         );
