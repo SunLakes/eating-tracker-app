@@ -97,7 +97,7 @@ public class QrActivity extends AppCompatActivity {
     }
 
     private void initialiseDetectorsAndSources() {
-        showToast("Barcode scanner started");
+//        showToast("Barcode scanner started");
 
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
@@ -140,7 +140,7 @@ public class QrActivity extends AppCompatActivity {
 
             @Override
             public void release() {
-                showToast("To prevent memory leaks barcode scanner has been stopped");
+//                showToast("To prevent memory leaks barcode scanner has been stopped");
             }
 
             @Override
