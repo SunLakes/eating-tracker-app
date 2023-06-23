@@ -184,7 +184,7 @@ public class QrActivity extends AppCompatActivity {
                     "http://192.168.1.50:8080/eating", objectMapper
             ).execute(entry).get();
             if (optionalError.isPresent()) {
-                showErrorDialog(optionalError.get().toString());
+                showErrorDialog(optionalError.get().getMessage());
             } else {
                 showToast(entry.getBraceletId() + " OK");
             }
