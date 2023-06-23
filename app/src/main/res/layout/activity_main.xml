@@ -113,6 +113,16 @@
                     android:text="@string/main_activity_day_3_name" />
         </RadioGroup>
 
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/urlTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dayRadioGroup"
+                android:layout_marginTop="32dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button

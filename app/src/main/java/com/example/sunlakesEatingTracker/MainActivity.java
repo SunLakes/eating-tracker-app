@@ -21,21 +21,27 @@ import static com.example.sunlakesEatingTracker.config.FestivalConfig.dayDateDay
 import static com.example.sunlakesEatingTracker.config.FestivalConfig.eatingTimeEatingId;
 import static com.example.sunlakesEatingTracker.config.MainActivityConfig.dayRadioIdDayId;
 import static com.example.sunlakesEatingTracker.config.MainActivityConfig.eatingRadioIdEatingId;
+import static com.example.sunlakesEatingTracker.config.ServerConfig.SERVER_URL;
+import static java.lang.String.format;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.sunlakesEatingTracker.component.IsExistsConnectionTask;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author Mykhailo Balakhon
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private Button startButton;
     private RadioGroup dayRadioGroup;
     private RadioGroup eatingRadioGroup;
+    private TextView urlTextView;
 
     private int dayId;
     private int eatingId;
@@ -73,8 +80,23 @@ public class MainActivity extends AppCompatActivity {
         });
         dayRadioGroup = findViewById(R.id.dayRadioGroup);
         eatingRadioGroup = findViewById(R.id.eatingRadioGroup);
+        urlTextView = findViewById(R.id.urlTextView);
 
         predefineArgumentsViaDate();
+        checkServerUrlConnection();
+    }
+
+    private void checkServerUrlConnection() {
+        try {
+            final boolean isExistsConnection = new IsExistsConnectionTask()
+                    .execute(SERVER_URL).get();
+            urlTextView.setText(isExistsConnection
+                    ? SERVER_URL
+                    : format("Connection to" + "\n%s\n" + "doesn't exists", SERVER_URL)
+            );
+        } catch (ExecutionException | InterruptedException e) {
+            showToast(e.getMessage());
+        }
     }
 
     private void configureAllArguments() throws DateTimeException {

@@ -21,7 +21,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.widget.Toast.LENGTH_SHORT;
 import static com.example.sunlakesEatingTracker.MainActivity.DAY_ID_KEY;
 import static com.example.sunlakesEatingTracker.MainActivity.EATING_ID_KEY;
-
+import static com.example.sunlakesEatingTracker.config.ServerConfig.SERVER_URL;
 import static java.lang.String.format;
 
 import android.os.Bundle;
@@ -179,9 +179,8 @@ public class QrActivity extends AppCompatActivity {
                 eatingId
         );
         try {
-            // FIXME hardcode url
             Optional<ApiError> optionalError = new SendRequestTask(
-                    "http://192.168.1.50:8080/eating", objectMapper
+                    SERVER_URL, objectMapper
             ).execute(entry).get();
             if (optionalError.isPresent()) {
                 showErrorDialog(optionalError.get().getMessage());
