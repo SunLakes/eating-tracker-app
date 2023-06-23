@@ -50,8 +50,9 @@ public class SendRequestTask extends AsyncTask<Entry, Integer, Optional<ApiError
 
     @Override
     protected Optional<ApiError> doInBackground(Entry... entry) {
+        HttpURLConnection connection = null;
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+            connection = (HttpURLConnection) new URL(url).openConnection();
 
             connection.setDoOutput(true);
             connection.addRequestProperty(
@@ -88,6 +89,10 @@ public class SendRequestTask extends AsyncTask<Entry, Integer, Optional<ApiError
             return Optional.of(
                     new ApiError(e.getClass().getSimpleName(), e)
             );
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
     }
 }
