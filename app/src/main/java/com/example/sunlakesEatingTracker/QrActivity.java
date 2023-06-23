@@ -109,8 +109,6 @@ public class QrActivity extends AppCompatActivity {
     }
 
     private void initialiseDetectorsAndSources() {
-//        showToast("Barcode scanner started");
-
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
                 .build();
@@ -152,7 +150,6 @@ public class QrActivity extends AppCompatActivity {
 
             @Override
             public void release() {
-//                showToast("To prevent memory leaks barcode scanner has been stopped");
             }
 
             @Override
@@ -170,7 +167,6 @@ public class QrActivity extends AppCompatActivity {
 
                 if (!cachedLastData.equals(data)) {
                     cachedLastData = data;
-                    System.out.println("recognized new");
                     sendPostRequest(data);
                 }
             }
@@ -206,23 +202,22 @@ public class QrActivity extends AppCompatActivity {
     }
 
     private void showErrorDialog(final String message) {
-        runOnUiThread(() ->
-                new AlertDialog.Builder(this)
-                        .setTitle("Error")
-                        .setMessage(message)
-                        .setPositiveButton("OK",
-                                (dialog, which) -> dialog.dismiss())
-                        .create().show()
+        runOnUiThread(() -> new AlertDialog
+                .Builder(this)
+                .setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton("OK",
+                        (dialog, ignored) -> dialog.dismiss())
+                .create().show()
         );
     }
 
     private void showToast(final String message) {
-        runOnUiThread(() ->
-                Toast.makeText(getApplicationContext(),
+        runOnUiThread(() -> Toast.makeText(
+                        getApplicationContext(),
                         message,
                         LENGTH_SHORT
                 ).show()
         );
     }
-
 }
