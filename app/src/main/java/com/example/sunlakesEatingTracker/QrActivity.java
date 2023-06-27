@@ -24,12 +24,10 @@ import static com.example.sunlakesEatingTracker.MainActivity.EATING_ID_KEY;
 import static com.example.sunlakesEatingTracker.config.ServerConfig.SERVER_URL;
 import static java.lang.String.format;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -108,10 +106,8 @@ public class QrActivity extends AppCompatActivity {
                     .setView(dialogInput)
                     .setPositiveButton("Add", (ignored1, ignored2) -> {
                         sendPostRequest(dialogInput.getText().toString());
-                        hideKeyboard();
                     })
                     .show();
-            showKeyboard(dialogInput);
         });
     }
 
@@ -244,18 +240,5 @@ public class QrActivity extends AppCompatActivity {
                         LENGTH_SHORT
                 ).show()
         );
-    }
-
-    private void showKeyboard(EditText editText) {
-        editText.requestFocus();
-        editText.postDelayed(() -> {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-        }, 100);
-    }
-
-    private void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 }
