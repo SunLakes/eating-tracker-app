@@ -16,9 +16,8 @@
 
 package com.example.sunlakesEatingTracker.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 /**
  * @author Mykhailo Balakhon
@@ -26,41 +25,51 @@ import java.util.Date;
  */
 public class ApiError {
 
-    private String status;
-
     private String timestamp;
-
+    private int status;
+    private String error;
     private String message;
+    private String path;
 
-    public ApiError(String status, Throwable e) {
-        Date date = Calendar.getInstance().getTime();
-        this.timestamp = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(date);
-        this.status = status;
+    public ApiError(Exception e) {
+        this.timestamp = Timestamp.from(Instant.now()).toString();
+        this.status = -1;
+        this.error = e.getClass().getSimpleName();
         this.message = e.getMessage();
+        this.path = "";
     }
 
     private ApiError() {
-    }
-
-    public String getStatus() {
-        return status;
     }
 
     public String getTimestamp() {
         return timestamp;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public String getError() {
+        return error;
+    }
+
     public String getMessage() {
         return message;
     }
 
+    public String getPath() {
+        return path;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ApiError{");
-        sb.append("status=").append(status);
-        sb.append(", timestamp='").append(timestamp).append('\'');
-        sb.append(", message='").append(message).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "ApiError{" +
+               "timestamp='" + timestamp + '\'' +
+               ", status=" + status +
+               ", error='" + error + '\'' +
+               ", message='" + message + '\'' +
+               ", path='" + path + '\'' +
+               '}';
     }
 }

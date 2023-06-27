@@ -86,9 +86,7 @@ public class SendRequestTask extends AsyncTask<Entry, Integer, Optional<ApiError
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return Optional.of(
-                    new ApiError(e.getClass().getSimpleName(), e)
-            );
+            return Optional.of(new ApiError(e));
         } finally {
             if (connection != null) {
                 connection.disconnect();
