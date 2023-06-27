@@ -26,6 +26,7 @@ import static java.lang.String.format;
 
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Button;
@@ -100,13 +101,14 @@ public class QrActivity extends AppCompatActivity {
         addManualButton = findViewById(R.id.addManualButton);
         addManualButton.setOnClickListener(ignored -> {
             EditText dialogInput = new EditText(QrActivity.this);
+            dialogInput.setTextSize(32);
+            dialogInput.setGravity(Gravity.CENTER);
             new AlertDialog.Builder(QrActivity.this)
                     .setTitle("Add manual")
                     .setMessage("Enter bracelet id")
                     .setView(dialogInput)
-                    .setPositiveButton("Add", (ignored1, ignored2) -> {
-                        sendPostRequest(dialogInput.getText().toString());
-                    })
+                    .setPositiveButton("Add", (ignored1, ignored2) ->
+                            sendPostRequest(dialogInput.getText().toString()))
                     .show();
         });
     }
