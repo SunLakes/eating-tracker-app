@@ -57,6 +57,8 @@ public class SendRequestTask extends AsyncTask<Entry, Integer, Optional<ApiError
             connection.setDoOutput(true);
             connection.addRequestProperty(
                     "Content-type", "application/json");
+            connection.setRequestProperty(
+                    "Accept", "application/json");
             connection.getRequestProperty("POST");
 
             OutputStreamWriter outputStream = new OutputStreamWriter(
