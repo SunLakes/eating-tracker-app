@@ -190,20 +190,27 @@ public class QrActivity extends AppCompatActivity {
                     SERVER_URL, objectMapper
             ).execute(entry).get();
             if (optionalError.isPresent()) {
-                showErrorDialog(optionalError.get().getMessage());
+                ApiError apiError = optionalError.get();
+                showErrorDialog(
+                        apiError.getError(),
+                        apiError.getMessage()
+                );
             } else {
                 showToast(entry.getBraceletId() + " OK");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            showErrorDialog(e.getMessage());
+            showErrorDialog(
+                    e.getClass().getSimpleName(),
+                    e.getMessage()
+            );
         }
     }
 
-    private void showErrorDialog(final String message) {
+    private void showErrorDialog(String title, String message) {
         runOnUiThread(() -> new AlertDialog
                 .Builder(this)
-                .setTitle("Error")
+                .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton("OK",
                         (dialog, ignored) -> dialog.dismiss())
