@@ -35,6 +35,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sunlakesEatingTracker.component.IsExistsConnectionTask;
+import com.google.android.material.color.DynamicColors;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DynamicColors.applyToActivityIfAvailable(this);
         setContentView(R.layout.activity_main);
 
         initViews();
