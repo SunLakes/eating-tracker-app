@@ -16,4 +16,5 @@
     <string name="main_activity_mode_switch_text">auto-complete</string>
     <string name="main_activity_start_button_text">Let\'s scan!</string>
     <string name="day_id_eating_id_template">day_id=%d, eating_id=%d</string>
+    <string name="add_manual_button_text">Add manual</string>
 </resources>

@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,7 @@ public class QrActivity extends AppCompatActivity {
     private SurfaceView surfaceView;
     private TextView scannedValueTextView;
     private TextView dayIdEatingIdTextView;
+    private Button addManualButton;
 
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
@@ -88,12 +90,16 @@ public class QrActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        surfaceView = findViewById(R.id.surfaceView);
         scannedValueTextView = findViewById(R.id.scannedValueTextView);
         dayIdEatingIdTextView = findViewById(R.id.dayIdEatingIdTextView);
         dayIdEatingIdTextView.setText(format(
                 getString(R.string.day_id_eating_id_template), dayId, eatingId
         ));
-        surfaceView = findViewById(R.id.surfaceView);
+        addManualButton = findViewById(R.id.addManualButton);
+        addManualButton.setOnClickListener(
+                ignored -> showToast("openManualCodeInputActivity")
+        );
     }
 
     @Override
