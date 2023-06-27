@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">sunlakes-eating-tracker</string>
+    <string name="app_name">Eating Tracker</string>
     <string name="no_data">No data</string>
     <string name="main_activity_day_id_switch_text">Select day</string>
     <string name="main_activity_day_1_name">1</string>
