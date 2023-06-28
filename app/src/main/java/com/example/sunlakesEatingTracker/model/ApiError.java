@@ -20,6 +20,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 /**
+ * @version 2.0
  * @author Mykhailo Balakhon
  * @link t.me/mibal_ua
  */

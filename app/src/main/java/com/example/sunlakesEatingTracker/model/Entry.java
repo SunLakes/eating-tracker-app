@@ -17,21 +17,22 @@
 package com.example.sunlakesEatingTracker.model;
 
 /**
+ * @version 2.0
  * @author Mykhailo Balakhon
  * @link t.me/mibal_ua
  */
 public class Entry {
 
-    private int braceletId = -1;
+    private int braceletId;
 
-    private int day = -1;
+    private int dayId;
 
-    private int eating = -1;
+    private int eatingId;
 
-    public Entry(int braceletId, int day, int eating) {
+    public Entry(int braceletId, int dayId, int eatingId) {
         this.braceletId = braceletId;
-        this.day = day;
-        this.eating = eating;
+        this.dayId = dayId;
+        this.eatingId = eatingId;
     }
 
     private Entry() {
@@ -41,20 +42,20 @@ public class Entry {
         return braceletId;
     }
 
-    public int getDay() {
-        return day;
+    public int getDayId() {
+        return dayId;
     }
 
-    public int getEating() {
-        return eating;
+    public int getEatingId() {
+        return eatingId;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Entry{");
         sb.append("braceletId=").append(braceletId);
-        sb.append(", day=").append(day);
-        sb.append(", eating=").append(eating);
+        sb.append(", day=").append(dayId);
+        sb.append(", eating=").append(eatingId);
         sb.append('}');
         return sb.toString();
     }
@@ -65,7 +66,7 @@ public class Entry {
         if (o == null || this.getClass() != o.getClass()) return false;
         Entry entry = (Entry) o;
         return braceletId == entry.braceletId &&
-               day == entry.day &&
-               eating == entry.eating;
+               dayId == entry.dayId &&
+               eatingId == entry.eatingId;
     }
 }
