@@ -42,7 +42,7 @@ public class AppConfig {
 
     public static final class ServerConfig {
 
-        public final static String SERVER_URL = "http://192.168.1.50:8080/eating";
+        public final static String SERVER_URL = "http://192.168.1.50:8080/api/eatings";
     }
 
     public static final class FestivalConfig {
