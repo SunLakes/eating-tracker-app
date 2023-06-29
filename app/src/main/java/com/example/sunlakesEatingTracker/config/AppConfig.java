@@ -38,12 +38,13 @@ import java.util.TreeMap;
  */
 public class AppConfig {
 
-    public static final boolean IS_DEBUG = false;
+    public static final boolean IS_DEBUG = true;
 
-    /**
-     * @author Mykhailo Balakhon
-     * @link t.me/mibal_ua
-     */
+    public static final class ServerConfig {
+
+        public final static String SERVER_URL = "http://192.168.1.50:8080/eating";
+    }
+
     public static final class FestivalConfig {
 
         public static final Map<LocalDate, Integer> dayDateDayId = Map.of(
@@ -73,10 +74,6 @@ public class AppConfig {
         ));
     }
 
-    /**
-     * @author Mykhailo Balakhon
-     * @link t.me/mibal_ua
-     */
     public static final class MainActivityConfig {
 
         public static final Map<Integer, Integer> dayRadioIdToDayId = Map.of(
@@ -94,14 +91,5 @@ public class AppConfig {
                 eating2Radio, 2,
                 eating3Radio, 3
         );
-    }
-
-    /**
-     * @author Mykhailo Balakhon
-     * @link t.me/mibal_ua
-     */
-    public static final class ServerConfig {
-
-        public final static String SERVER_URL = "http://192.168.1.50:8080/eating";
     }
 }
