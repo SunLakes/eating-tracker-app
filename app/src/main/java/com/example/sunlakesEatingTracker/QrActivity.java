@@ -21,7 +21,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.widget.Toast.LENGTH_SHORT;
 import static com.example.sunlakesEatingTracker.MainActivity.DAY_ID_KEY;
 import static com.example.sunlakesEatingTracker.MainActivity.EATING_ID_KEY;
-import static com.example.sunlakesEatingTracker.config.ServerConfig.SERVER_URL;
+import static com.example.sunlakesEatingTracker.config.AppConfig.ServerConfig.SERVER_URL;
 import static java.lang.String.format;
 
 import android.os.Bundle;

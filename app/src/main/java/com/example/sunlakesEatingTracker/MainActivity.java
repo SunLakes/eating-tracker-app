@@ -17,11 +17,11 @@
 package com.example.sunlakesEatingTracker;
 
 import static android.widget.Toast.LENGTH_SHORT;
-import static com.example.sunlakesEatingTracker.config.FestivalConfig.dayDateDayId;
-import static com.example.sunlakesEatingTracker.config.FestivalConfig.eatingTimeEatingId;
-import static com.example.sunlakesEatingTracker.config.MainActivityConfig.dayRadioIdToDayId;
-import static com.example.sunlakesEatingTracker.config.MainActivityConfig.eatingRadioIdToEatingId;
-import static com.example.sunlakesEatingTracker.config.ServerConfig.SERVER_URL;
+import static com.example.sunlakesEatingTracker.config.AppConfig.FestivalConfig.dayDateDayId;
+import static com.example.sunlakesEatingTracker.config.AppConfig.FestivalConfig.eatingTimeEatingId;
+import static com.example.sunlakesEatingTracker.config.AppConfig.MainActivityConfig.dayRadioIdToDayId;
+import static com.example.sunlakesEatingTracker.config.AppConfig.MainActivityConfig.eatingRadioIdToEatingId;
+import static com.example.sunlakesEatingTracker.config.AppConfig.ServerConfig.SERVER_URL;
 import static java.lang.String.format;
 
 import android.content.Intent;
