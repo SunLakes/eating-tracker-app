@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 /**
- * @version 2.0
+ * @version 2.1
  * @author Mykhailo Balakhon
  * @link t.me/mibal_ua
  */
@@ -63,13 +63,18 @@ public class ApiError {
         return path;
     }
 
+    /**
+     *  CUT DEBUG INFO:
+     *       Person with bracelet_id=440 did not register for day=1. | Entry{...} Person{...}; Person already eaten. | Entry{...} Person{...}
+     *                                                             ^                        ^                      ^                        ^
+     *                                                           START                     END                   START                     END
+     *  EXAMPLE:
+     *       from: 'Person with bracelet_id=440 did not register for day=1. | Entry{...} Person{...}; Person already eaten. | Entry{...} Person{...}'
+     *       to:   'Person with bracelet_id=440 did not register for day=1;\nPerson already eaten.'
+     */
     public String getSimpleMessage() {
-        final String divider = " | ";
-        int index = message.indexOf(divider);
-        if (index == -1) {
-            return message;
-        }
-        return message.substring(0, index);
+        return message.replaceAll("\\. \\| .+\\}; ", ";\n")
+                .replaceAll("\\. \\| .+\\}", ".");
     }
 
     @Override
