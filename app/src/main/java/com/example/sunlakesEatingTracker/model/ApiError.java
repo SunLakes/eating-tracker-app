@@ -63,6 +63,15 @@ public class ApiError {
         return path;
     }
 
+    public String getSimpleMessage() {
+        final String divider = " | ";
+        int index = message.indexOf(divider);
+        if (index == -1) {
+            return message;
+        }
+        return message.substring(0, index);
+    }
+
     @Override
     public String toString() {
         return "ApiError{" +

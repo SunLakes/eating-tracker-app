@@ -38,6 +38,8 @@ import java.util.TreeMap;
  */
 public class AppConfig {
 
+    public static final boolean IS_DEBUG = false;
+
     /**
      * @author Mykhailo Balakhon
      * @link t.me/mibal_ua
