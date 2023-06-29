@@ -26,6 +26,7 @@ import static com.example.sunlakesEatingTracker.config.AppConfig.ServerConfig.SE
 import static java.lang.String.format;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.SurfaceHolder;
@@ -104,6 +105,7 @@ public class QrActivity extends AppCompatActivity {
         addManualButton = findViewById(R.id.addManualButton);
         addManualButton.setOnClickListener(ignored -> {
             EditText dialogInput = new EditText(QrActivity.this);
+            dialogInput.setInputType(InputType.TYPE_CLASS_NUMBER);
             dialogInput.setTextSize(32);
             dialogInput.setGravity(Gravity.CENTER);
             new AlertDialog.Builder(QrActivity.this)
