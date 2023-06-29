@@ -121,8 +121,10 @@ public class MainActivity extends AppCompatActivity {
             final boolean isExistsConnection = new IsExistsConnectionTask()
                     .execute(SERVER_URL).get();
             urlTextView.setText(isExistsConnection
-                    ? SERVER_URL
-                    : format("Connection to" + "\n%s\n" + "doesn't exists", SERVER_URL)
+                            ? SERVER_URL
+                            : format("Connection to" + "\n" +
+                                     "%s" + "\n" +
+                                     "doesn't exists", SERVER_URL)
             );
         } catch (ExecutionException | InterruptedException e) {
             showToast(e.getMessage());
